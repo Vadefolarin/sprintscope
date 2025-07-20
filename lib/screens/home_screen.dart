@@ -119,7 +119,9 @@ class HomeScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const AuthScreen(),
+                                builder:
+                                    (context) =>
+                                        const AuthScreen(isSignUp: false),
                               ),
                             );
                           },
@@ -299,7 +301,9 @@ class HomeScreen extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder:
-                                            (context) => const AuthScreen(),
+                                            (context) => const AuthScreen(
+                                              isSignUp: true,
+                                            ),
                                       ),
                                     );
                                   },
@@ -398,7 +402,8 @@ class HomeScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const AuthScreen(),
+                            builder:
+                                (context) => const AuthScreen(isSignUp: true),
                           ),
                         );
                       },
@@ -512,7 +517,9 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AuthScreen()),
+                MaterialPageRoute(
+                  builder: (context) => const AuthScreen(isSignUp: true),
+                ),
               );
             },
             style: TextButton.styleFrom(
@@ -961,7 +968,8 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const AuthScreen(),
+                          builder:
+                              (context) => const AuthScreen(isSignUp: false),
                         ),
                       );
                     },
@@ -996,7 +1004,8 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const AuthScreen(),
+                          builder:
+                              (context) => const AuthScreen(isSignUp: false),
                         ),
                       );
                     },
