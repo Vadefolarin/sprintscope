@@ -188,7 +188,7 @@ class HomeScreen extends StatelessWidget {
                       width: double.infinity,
                       height: isMobile ? 300 : 400,
                       child: Image.asset(
-                        'assets/images/footer.png',
+                        'assets/images/mobile_landing.png',
                         fit: BoxFit.cover,
                         errorBuilder:
                             (context, error, stackTrace) => Container(
@@ -282,7 +282,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(height: AppSpacing.md),
                       // Copyright
                       Text(
-                        '© 2025 Brand. All rights reserved',
+                        '© 2023 SprintScope. All rights reserved.',
                         style: AppTextStyles.bodyMedium.copyWith(
                           color: AppColors.textInverse,
                         ),
@@ -603,19 +603,58 @@ class HomeScreen extends StatelessWidget {
           'Reviews',
         ]),
         const SizedBox(width: AppSpacing.xl),
-        _buildFooterColumn('Product', [
-          'Features',
-          'Get started',
-          'Case studies',
-          'Reviews',
+        _buildFooterColumn('Company', ['About us', 'Careers', 'Press', 'Blog']),
+        const SizedBox(width: AppSpacing.xl),
+        _buildFooterColumn('Support', [
+          'Contact us',
+          'Help center',
+          'Privacy policy',
+          'Terms of service',
         ]),
         const SizedBox(width: AppSpacing.xl),
-        _buildFooterColumn('Product', [
-          'Features',
-          'Get started',
-          'Case studies',
-          'Reviews',
-        ]),
+        // Social Media Icons
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: AppSpacing.sm),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.facebook,
+                    color: AppColors.textInverse,
+                    size: 20,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.flutter_dash,
+                    color: AppColors.textInverse,
+                    size: 20,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.camera_alt,
+                    color: AppColors.textInverse,
+                    size: 20,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.link,
+                    color: AppColors.textInverse,
+                    size: 20,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -645,26 +684,74 @@ class HomeScreen extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.lg),
         // Navigation Links
-        _buildFooterColumn('Product', [
-          'Features',
-          'Get started',
-          'Case studies',
-          'Reviews',
-        ]),
-        const SizedBox(height: AppSpacing.md),
-        _buildFooterColumn('Product', [
-          'Features',
-          'Get started',
-          'Case studies',
-          'Reviews',
-        ]),
-        const SizedBox(height: AppSpacing.md),
-        _buildFooterColumn('Product', [
-          'Features',
-          'Get started',
-          'Case studies',
-          'Reviews',
-        ]),
+        Row(
+          children: [
+            Expanded(
+              child: _buildFooterColumn('Product', [
+                'Features',
+                'Get started',
+                'Case studies',
+                'Reviews',
+              ]),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Expanded(
+              child: _buildFooterColumn('Company', [
+                'About us',
+                'Careers',
+                'Press',
+                'Blog',
+              ]),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Expanded(
+              child: _buildFooterColumn('Support', [
+                'Contact us',
+                'Help center',
+                'Privacy policy',
+                'Terms of service',
+              ]),
+            ),
+          ],
+        ),
+        const SizedBox(height: AppSpacing.lg),
+        // Social Media Icons
+        Row(
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.facebook,
+                color: AppColors.textInverse,
+                size: 20,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.flutter_dash,
+                color: AppColors.textInverse,
+                size: 20,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.camera_alt,
+                color: AppColors.textInverse,
+                size: 20,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.link,
+                color: AppColors.textInverse,
+                size: 20,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
