@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
-import 'constants/theme.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
+import 'constants/theme.dart';
+import 'providers/auth_provider.dart';
 
-void main() {
-  runApp(const SprintScopeApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase
+  await Firebase.initializeApp();
+
+  runApp(const MyApp());
 }
 
-class SprintScopeApp extends StatelessWidget {
-  const SprintScopeApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SprintScope',
-      theme: AppTheme.lightTheme,
-      home: const HomeScreen(),
-      debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()..initialize()),
+      ],
+      child: MaterialApp(
+        title: 'SprintScope',
+        theme: AppTheme.lightTheme,
+        home: const HomeScreen(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

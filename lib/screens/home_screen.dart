@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../constants/text_styles.dart';
 import '../constants/spacing.dart';
-import '../widgets/custom_button.dart';
 import 'auth_screen.dart';
 
 class HomeScreen extends StatelessWidget {
