@@ -3,6 +3,7 @@ import '../constants/colors.dart';
 import '../constants/text_styles.dart';
 import '../constants/spacing.dart';
 import '../widgets/custom_button.dart';
+import 'auth_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: _buildMobileDrawer(context),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final isMobile = constraints.maxWidth < 768;
@@ -17,69 +19,94 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Header/Navigation Bar
+                // Header/Navigation Bar - Smaller
                 Container(
                   color: const Color(0xFF1E293B), // Dark blue background
                   padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? AppSpacing.md : AppSpacing.xl,
-                    vertical: AppSpacing.md,
+                    horizontal: isMobile ? AppSpacing.sm : AppSpacing.lg,
+                    vertical: AppSpacing.sm, // Reduced from md to sm
                   ),
                   child: Row(
                     children: [
-                      // Logo
+                      // Logo - Smaller
                       RichText(
                         text: TextSpan(
                           children: [
                             TextSpan(
                               text: 'Sprint',
-                              style: AppTextStyles.titleLarge.copyWith(
+                              style: AppTextStyles.titleMedium.copyWith(
+                                // Reduced from titleLarge
                                 color: AppColors.textInverse,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                             TextSpan(
                               text: 'Scope',
-                              style: AppTextStyles.titleLarge.copyWith(
+                              style: AppTextStyles.titleMedium.copyWith(
+                                // Reduced from titleLarge
                                 color: AppColors.warning,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],
                         ),
                       ),
                       const Spacer(),
-                      // Navigation Links (hidden on mobile)
+                      // Navigation Links (hidden on mobile) - Smaller
                       if (!isMobile) ...[
                         TextButton(
                           onPressed: () {},
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.sm,
+                              vertical: AppSpacing.xs,
+                            ),
+                          ),
                           child: Text(
                             'Features',
-                            style: AppTextStyles.bodyMedium.copyWith(
+                            style: AppTextStyles.bodySmall.copyWith(
+                              // Reduced from bodyMedium
                               color: AppColors.textInverse,
                             ),
                           ),
                         ),
-                        const SizedBox(width: AppSpacing.md),
+                        const SizedBox(width: AppSpacing.sm), // Reduced from md
                         TextButton(
                           onPressed: () {},
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.sm,
+                              vertical: AppSpacing.xs,
+                            ),
+                          ),
                           child: Text(
                             'About',
-                            style: AppTextStyles.bodyMedium.copyWith(
+                            style: AppTextStyles.bodySmall.copyWith(
+                              // Reduced from bodyMedium
                               color: AppColors.textInverse,
                             ),
                           ),
                         ),
-                        const SizedBox(width: AppSpacing.md),
+                        const SizedBox(width: AppSpacing.sm), // Reduced from md
                         TextButton(
                           onPressed: () {},
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.sm,
+                              vertical: AppSpacing.xs,
+                            ),
+                          ),
                           child: Text(
                             'Contact',
-                            style: AppTextStyles.bodyMedium.copyWith(
+                            style: AppTextStyles.bodySmall.copyWith(
+                              // Reduced from bodyMedium
                               color: AppColors.textInverse,
                             ),
                           ),
                         ),
-                        const SizedBox(width: AppSpacing.md),
+                        const SizedBox(width: AppSpacing.sm), // Reduced from md
                       ],
-                      // Sign in Button
+                      // Sign in Button - Smaller
                       Container(
                         decoration: BoxDecoration(
                           color: AppColors.warning,
@@ -88,24 +115,47 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AuthScreen(),
+                              ),
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.md,
+                              vertical: AppSpacing.sm,
+                            ),
+                          ),
                           child: Text(
                             'Sign in',
-                            style: AppTextStyles.bodyMedium.copyWith(
+                            style: AppTextStyles.bodySmall.copyWith(
+                              // Reduced from bodyMedium
                               color: AppColors.textInverse,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
                       ),
-                      // Mobile menu button
+                      // Mobile menu button - Smaller
                       if (isMobile) ...[
-                        const SizedBox(width: AppSpacing.md),
+                        const SizedBox(width: AppSpacing.sm), // Reduced from md
                         IconButton(
                           icon: const Icon(
                             Icons.menu,
                             color: AppColors.textInverse,
+                            size: 20, // Reduced size
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Scaffold.of(context).openEndDrawer();
+                          },
+                          padding: const EdgeInsets.all(AppSpacing.xs),
+                          constraints: const BoxConstraints(
+                            minWidth: 32,
+                            minHeight: 32,
+                          ),
                         ),
                       ],
                     ],
@@ -119,7 +169,10 @@ class HomeScreen extends StatelessWidget {
                     horizontal: isMobile ? AppSpacing.md : AppSpacing.xl,
                     vertical: AppSpacing.xl,
                   ),
-                  child: isMobile ? _buildMobileHero() : _buildDesktopHero(),
+                  child:
+                      isMobile
+                          ? _buildMobileHero(context)
+                          : _buildDesktopHero(context),
                 ),
 
                 // How It Works Section
@@ -241,7 +294,15 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 child: TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) => const AuthScreen(),
+                                      ),
+                                    );
+                                  },
                                   style: TextButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: AppSpacing.lg,
@@ -299,7 +360,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDesktopHero() {
+  Widget _buildDesktopHero(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -333,7 +394,14 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
                     ),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AuthScreen(),
+                          ),
+                        );
+                      },
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                           horizontal: AppSpacing.lg,
@@ -414,7 +482,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMobileHero() {
+  Widget _buildMobileHero(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -441,7 +509,12 @@ class HomeScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
           ),
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AuthScreen()),
+              );
+            },
             style: TextButton.styleFrom(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSpacing.lg,
@@ -788,6 +861,165 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildMobileDrawer(BuildContext context) {
+    return Drawer(
+      backgroundColor: const Color(0xFF1E293B), // Dark blue background
+      child: Column(
+        children: [
+          // Header with logo
+          Container(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Row(
+              children: [
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Sprint',
+                        style: AppTextStyles.titleLarge.copyWith(
+                          color: AppColors.textInverse,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'Scope',
+                        style: AppTextStyles.titleLarge.copyWith(
+                          color: AppColors.warning,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.close, color: AppColors.textInverse),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+          ),
+
+          // Navigation Links - Centered
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Home Link
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.lg,
+                    vertical: AppSpacing.md,
+                  ),
+                  child: Text(
+                    'Home',
+                    style: AppTextStyles.titleMedium.copyWith(
+                      color: AppColors.textInverse,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+
+                const SizedBox(height: AppSpacing.lg),
+
+                // Dashboard Link
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.lg,
+                    vertical: AppSpacing.md,
+                  ),
+                  child: Text(
+                    'Dashboard',
+                    style: AppTextStyles.titleMedium.copyWith(
+                      color: AppColors.textInverse,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Action Buttons at Bottom
+          Container(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              children: [
+                // Sign in Button
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppColors.warning,
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AuthScreen(),
+                        ),
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.lg,
+                        vertical: AppSpacing.md,
+                      ),
+                    ),
+                    child: Text(
+                      'Sign in',
+                      style: AppTextStyles.labelLarge.copyWith(
+                        color: AppColors.textInverse,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: AppSpacing.md),
+
+                // Log in Button
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppColors.warning,
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AuthScreen(),
+                        ),
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.lg,
+                        vertical: AppSpacing.md,
+                      ),
+                    ),
+                    child: Text(
+                      'Log in',
+                      style: AppTextStyles.labelLarge.copyWith(
+                        color: AppColors.textInverse,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
