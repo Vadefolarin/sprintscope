@@ -25,55 +25,65 @@ class _AuthScreenState extends State<AuthScreen> {
         builder: (context, constraints) {
           final isMobile = constraints.maxWidth < 768;
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            child: Column(
-              children: [
-                const SizedBox(height: AppSpacing.xl),
+          return Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: SizedBox(
+                width: isMobile ? double.infinity : 500,
+                child: Card(
+                  elevation: 8,
+                  shadowColor: Colors.black.withOpacity(0.1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppSpacing.xl),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Logo
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Sprint',
+                                style: AppTextStyles.headlineLarge.copyWith(
+                                  color: const Color(0xFF1E293B), // Blue
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'Scope',
+                                style: AppTextStyles.headlineLarge.copyWith(
+                                  color: AppColors.warning, // Orange
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: AppSpacing.xl),
 
-                // Logo
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Sprint',
-                        style: AppTextStyles.headlineLarge.copyWith(
-                          color: const Color(0xFF1E293B), // Blue
-                          fontWeight: FontWeight.w700,
+                        // Title
+                        Text(
+                          widget.isSignUp
+                              ? 'Create your account'
+                              : 'Log in to your account',
+                          style: AppTextStyles.headlineMedium.copyWith(
+                            color: const Color(0xFF1E293B),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                      ),
-                      TextSpan(
-                        text: 'Scope',
-                        style: AppTextStyles.headlineLarge.copyWith(
-                          color: AppColors.warning, // Orange
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+                        const SizedBox(height: AppSpacing.xl),
+
+                        // Auth Form
+                        _buildAuthForm(),
+                      ],
+                    ),
                   ),
                 ),
-                const SizedBox(height: AppSpacing.xl),
-
-                // Title
-                Text(
-                  widget.isSignUp
-                      ? 'Create your account'
-                      : 'Log in to your account',
-                  style: AppTextStyles.headlineMedium.copyWith(
-                    color: const Color(0xFF1E293B),
-                    fontWeight: FontWeight.w600,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: AppSpacing.xl),
-
-                // Auth Form
-                Container(
-                  width: isMobile ? double.infinity : 400,
-                  padding: const EdgeInsets.all(AppSpacing.xl),
-                  child: _buildAuthForm(),
-                ),
-              ],
+              ),
             ),
           );
         },
