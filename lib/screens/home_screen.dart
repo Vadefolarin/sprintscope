@@ -188,7 +188,7 @@ class HomeScreen extends StatelessWidget {
                       width: double.infinity,
                       height: isMobile ? 300 : 400,
                       child: Image.asset(
-                        'assets/images/mobile_landing.png',
+                        'assets/images/footer.png',
                         fit: BoxFit.cover,
                         errorBuilder:
                             (context, error, stackTrace) => Container(
@@ -416,7 +416,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildMobileHero() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Analyze Sprint Techniques like never before',
@@ -424,7 +424,7 @@ class HomeScreen extends StatelessWidget {
             fontWeight: FontWeight.w700,
             color: const Color(0xFF1E293B), // Dark blue text
           ),
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.start,
         ),
         const SizedBox(height: AppSpacing.md),
         Text(
@@ -432,7 +432,7 @@ class HomeScreen extends StatelessWidget {
           style: AppTextStyles.bodyLargeSecondary.copyWith(
             color: const Color(0xFF64748B), // Lighter gray text
           ),
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.start,
         ),
         const SizedBox(height: AppSpacing.lg),
         Container(
@@ -461,7 +461,7 @@ class HomeScreen extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
           child: Image.asset(
-            'assets/images/footer.png',
+            'assets/images/mobile_landing.png',
             height: 200,
             width: double.infinity,
             fit: BoxFit.cover,
