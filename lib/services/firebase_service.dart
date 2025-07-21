@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/video.dart';
 
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -80,13 +81,40 @@ class FirebaseService {
   }
 
   // Get user data from Firestore
-  Future<Map<String, dynamic>?> getUserData(String uid) async {
+  Future<Map<String, dynamic>> getUserData(String uid) async {
     try {
       DocumentSnapshot doc =
           await _firestore.collection('users').doc(uid).get();
-      return doc.data() as Map<String, dynamic>?;
+      return doc.data() as Map<String, dynamic>? ?? {};
     } catch (e) {
       throw Exception('Failed to get user data: $e');
+    }
+  }
+
+  // Get user videos from Firestore
+  Future<List<Video>> getUserVideos(String uid) async {
+    try {
+      QuerySnapshot querySnapshot =
+          await _firestore
+              .collection('videos')
+              .where('coachId', isEqualTo: uid)
+              .orderBy('uploadDate', descending: true)
+              .get();
+
+      return querySnapshot.docs.map((doc) {
+        return Video.fromMap(doc.data() as Map<String, dynamic>, doc.id);
+      }).toList();
+    } catch (e) {
+      throw Exception('Failed to get user videos: $e');
+    }
+  }
+
+  // Add new video
+  Future<void> addVideo(Video video) async {
+    try {
+      await _firestore.collection('videos').add(video.toMap());
+    } catch (e) {
+      throw Exception('Failed to add video: $e');
     }
   }
 

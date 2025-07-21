@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../constants/text_styles.dart';
 import '../constants/spacing.dart';
-import 'auth_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -115,13 +114,10 @@ class HomeScreen extends StatelessWidget {
                         ),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) =>
-                                        const AuthScreen(isSignUp: false),
-                              ),
+                              '/auth',
+                              arguments: {'isSignUp': false},
                             );
                           },
                           style: TextButton.styleFrom(
@@ -296,14 +292,10 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 child: TextButton(
                                   onPressed: () {
-                                    Navigator.push(
+                                    Navigator.pushNamed(
                                       context,
-                                      MaterialPageRoute(
-                                        builder:
-                                            (context) => const AuthScreen(
-                                              isSignUp: true,
-                                            ),
-                                      ),
+                                      '/auth',
+                                      arguments: {'isSignUp': true},
                                     );
                                   },
                                   style: TextButton.styleFrom(
@@ -313,7 +305,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                   child: Text(
-                                    'Sign in',
+                                    'Get Started',
                                     style: AppTextStyles.labelLarge.copyWith(
                                       color: AppColors.textInverse,
                                       fontWeight: FontWeight.w600,
@@ -398,12 +390,10 @@ class HomeScreen extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(
-                            builder:
-                                (context) => const AuthScreen(isSignUp: true),
-                          ),
+                          '/auth',
+                          arguments: {'isSignUp': true},
                         );
                       },
                       style: TextButton.styleFrom(
@@ -514,11 +504,10 @@ class HomeScreen extends StatelessWidget {
           ),
           child: TextButton(
             onPressed: () {
-              Navigator.push(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const AuthScreen(isSignUp: true),
-                ),
+                '/auth',
+                arguments: {'isSignUp': true},
               );
             },
             style: TextButton.styleFrom(
@@ -964,12 +953,10 @@ class HomeScreen extends StatelessWidget {
                   child: TextButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => const AuthScreen(isSignUp: false),
-                        ),
+                        '/auth',
+                        arguments: {'isSignUp': false},
                       );
                     },
                     style: TextButton.styleFrom(
@@ -1000,12 +987,10 @@ class HomeScreen extends StatelessWidget {
                   child: TextButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => const AuthScreen(isSignUp: false),
-                        ),
+                        '/auth',
+                        arguments: {'isSignUp': false},
                       );
                     },
                     style: TextButton.styleFrom(

@@ -345,15 +345,63 @@ class _AuthScreenState extends State<AuthScreen> {
         password: _passwordController.text,
         fullName: _fullNameController.text.trim(),
       );
+
+      if (success && mounted) {
+        // Show success message and prompt to login
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder:
+              (context) => AlertDialog(
+                title: Row(
+                  children: [
+                    Icon(Icons.check_circle, color: Colors.green, size: 24),
+                    const SizedBox(width: AppSpacing.sm),
+                    const Text('Account Created!'),
+                  ],
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Your account has been successfully created!',
+                      style: AppTextStyles.bodyMedium,
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      'Please log in with your email and password to access your dashboard.',
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close dialog
+                      Navigator.of(context).pushReplacementNamed(
+                        '/auth',
+                        arguments: {'isSignUp': false},
+                      );
+                    },
+                    child: const Text('Go to Login'),
+                  ),
+                ],
+              ),
+        );
+      }
     } else {
       success = await authProvider.signIn(
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
-    }
 
-    if (success && mounted) {
-      Navigator.of(context).pop(); // Return to home screen
+      if (success && mounted) {
+        // Navigate to dashboard on successful login
+        Navigator.of(context).pushReplacementNamed('/dashboard');
+      }
     }
   }
 
