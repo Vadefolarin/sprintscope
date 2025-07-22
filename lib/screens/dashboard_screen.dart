@@ -283,7 +283,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ),
                             child: TextButton(
                               onPressed: () {
-                                // TODO: Implement video upload
+                                Navigator.pushNamed(context, '/upload');
                               },
                               style: TextButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(
@@ -362,7 +362,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             child: TextButton(
               onPressed: () {
-                // TODO: Implement video upload
+                Navigator.pushNamed(context, '/upload');
               },
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(

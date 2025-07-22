@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/auth_screen.dart';
+import 'screens/upload_screen.dart';
 import 'constants/theme.dart';
 import 'providers/auth_provider.dart';
 import 'firebase_options.dart';
@@ -43,6 +44,10 @@ class MyApp extends StatelessWidget {
             case '/dashboard':
               return MaterialPageRoute(
                 builder: (context) => const DashboardScreen(),
+              );
+            case '/upload':
+              return MaterialPageRoute(
+                builder: (context) => const UploadScreen(),
               );
             case '/auth':
               final args = settings.arguments as Map<String, dynamic>?;
